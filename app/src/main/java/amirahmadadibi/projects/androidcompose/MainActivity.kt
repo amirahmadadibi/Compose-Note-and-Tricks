@@ -10,10 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import amirahmadadibi.projects.androidcompose.ui.theme.AndroidComposeTheme
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 
@@ -36,21 +41,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Box(
-        modifier = Modifier.background(Color.Red)
-            .fillMaxSize(),
-//            .size(width = 100.dp, height = 100.dp)
-
-    contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Hello $name! ",
-            modifier = Modifier.align(Alignment.BottomCenter)
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            contentDescription = "android logo",
+            modifier = Modifier.background(Color.Green)
         )
-        Text(
-            text = "AmirahmadAdibi",
-            modifier = Modifier.align(Alignment.TopEnd)
-        )
+        if(name.length > 5){
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "arrow back")
+        }
+        
     }
 }
 
@@ -58,6 +58,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     AndroidComposeTheme {
-        Greeting("Android")
+        Greeting("An")
     }
 }
