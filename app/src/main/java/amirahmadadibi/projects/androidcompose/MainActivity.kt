@@ -3,21 +3,16 @@ package amirahmadadibi.projects.androidcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import amirahmadadibi.projects.androidcompose.ui.theme.AndroidComposeTheme
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import android.widget.Space
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
 
 
 class MainActivity : ComponentActivity() {
@@ -26,15 +21,35 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AndroidComposeTheme {
-                var count = remember {
-                    mutableStateOf(0)
+                var name by remember {
+                    mutableStateOf("")
                 }
-                Column {
-                    Text("${count.value}")
-                    Button(onClick = {
-                        count.value = count.value + 1
-                    }) {
-                        Text(text = "Click")
+
+                var nameList by remember {
+                    mutableStateOf(listOf<String>())
+                }
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        OutlinedTextField(modifier = Modifier.weight(1f),value = name, onValueChange = { text ->
+                            name = text
+                        })
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Button(onClick = {
+                                nameList = nameList + name
+                        }) {
+                            Text(text = "Add")
+                        }
+                    }
+                    LazyColumn {
+                        items(nameList) { item ->
+                            Text(text = item, modifier = Modifier.fillMaxWidth().padding(16.dp))
+                            Divider()
+                        }
                     }
                 }
             }
@@ -44,8 +59,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    LazyColumn(modifier = Modifier.fillMaxSize()){
-        items(100){
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(100) {
             Text(text = "AmirahmadAdibi")
         }
     }
