@@ -36,19 +36,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Row(
+    Box(
         modifier = Modifier.background(Color.Red)
-            .fillMaxSize()
+            .fillMaxSize(),
 //            .size(width = 100.dp, height = 100.dp)
-        ,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
+
+    contentAlignment = Alignment.Center
     ) {
         Text(
             text = "Hello $name! ",
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
         Text(
             text = "AmirahmadAdibi",
+            modifier = Modifier.align(Alignment.TopEnd)
         )
     }
 }
